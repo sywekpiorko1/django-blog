@@ -13,6 +13,6 @@ matrix:
         - python: 3.7
           dist: xenial
 sudo: true
-install: "pip install -t requirements.txt"
+install: "pip install -r requirements.txt"
 script:
 - SECRET_KEY="whatever" ./manage.py test
