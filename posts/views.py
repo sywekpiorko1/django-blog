@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .forms import BlogPostForms
+from .models import Post
+from .forms import BlogPostForm
 
 def get_posts(request):
     """
@@ -10,7 +11,7 @@ def get_posts(request):
     """
 
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, "blogpost.html", {'posts': posts})
+    return render(request, "blogposts.html", {'posts': posts})
 
 def post_detail(request, pk):
     """
@@ -39,7 +40,6 @@ def create_or_edit_post(request, pk=None):
         if form.is_valid():
             post = form.save()
             return redirect(post_detail, post.pk)
-        else:
-            form = BlogPostForm(instance=post)
-        return render(request, 'blogpostform.html', {'form': form})
-    
+    else:
+        form = BlogPostForm(instance=post)
+    return render(request, 'blogpostform.html', {'form': form})
