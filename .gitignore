@@ -1,6 +1,7 @@
 .django_blog/
 .vscode/
 env.py
+travis_temp.yml
 
 
 # Created by https://www.gitignore.io/api/django
